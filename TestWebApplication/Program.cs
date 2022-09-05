@@ -21,8 +21,9 @@ namespace TestWebApplication
             var serverVersion = new MySqlServerVersion(new Version(8, 0, 26));
             string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-            // Add services to the container.
-            builder.Services.AddDbContextPool<ApplicationDbContext>(options => options.UseMySql(connectionString, serverVersion));
+            // Add services to the middleware.
+            builder.Services.AddDbContext<ApplicationDbContext>();
+
             builder.Services.AddControllersWithViews();
             
 
