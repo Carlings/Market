@@ -153,17 +153,16 @@ namespace TestWebApplication.Controllers
             if (id == null || id == 0)
                 return NotFound();
 
-            var obj = _db.Product.Include(u => u.Category).FirstOrDefault(u => u.Id == id);
-            //obj.Category = _db.Category.Find(obj.CategoryId);
+            Product product = _db.Product.Include(u => u.Category).FirstOrDefault(u => u.Id == id);
 
-            if (obj == null)
+            if (product == null)
                 return NotFound();
 
-            return View(obj);
+            return View(product);
         }
 
         // post - delete
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeletePost(int? id)
         {
@@ -175,7 +174,7 @@ namespace TestWebApplication.Controllers
                 var oldFile = Path.Combine(upload, obj.Image);
 
                 if (System.IO.File.Exists(oldFile))
-                { 
+                {
                     System.IO.File.Delete(oldFile);
                 }
                 _db.Product.Remove(obj);
