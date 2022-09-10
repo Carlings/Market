@@ -3222,3 +3222,18 @@ info: 09.09.2022 22:25:32.503 RelationalEventId.CommandExecuted[20101] (Microsof
       Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
       SELECT `c`.`Name` AS `Text`, CAST(`c`.`Id` AS char) AS `Value`
       FROM `Category` AS `c`
+info: 10.09.2022 21:37:58.341 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 6.0.7 initialized 'ApplicationDbContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.2' with options: ServerVersion 8.2.6-mysql 
+info: 10.09.2022 21:37:58.554 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (31ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT CASE WHEN COUNT(*) = 0 THEN FALSE ELSE TRUE END
+      FROM information_schema.tables
+      WHERE table_type = 'BASE TABLE' AND table_schema = 'test'
+info: 10.09.2022 21:37:58.704 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (13ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT `c`.`Id`, `c`.`DisplayOrder`, `c`.`Name`
+      FROM `Category` AS `c`
+info: 10.09.2022 21:37:58.736 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT `c`.`Id`, `c`.`DisplayOrder`, `c`.`Name`
+      FROM `Category` AS `c`
