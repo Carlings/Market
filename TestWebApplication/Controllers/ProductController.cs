@@ -24,12 +24,8 @@ namespace TestWebApplication.Controllers
             foreach (var item in objList)
             {
                 item.Category = _db.Category.FirstOrDefault(category => category.Id == item.CategoryId);
+                item.Type = _db.Type.FirstOrDefault(appType => appType.Id == item.ApplicationTypeId);
             };
-
-            //for (int i = 0; i < arr.Length; i++)
-            //{
-            //    arr[i].Category = _db.Category.FirstOrDefault(category => category.Id == arr[i].CategoryId);
-            //}
 
             return View(objList);
         }
@@ -37,15 +33,6 @@ namespace TestWebApplication.Controllers
         // get - upsert
         public IActionResult Upsert(int? id)
         {
-            //IEnumerable<SelectListItem> CategoryDropDown = _db.Category.Select(i => new SelectListItem
-            //{
-            //    Text = i.Name,
-            //    Value = i.Id.ToString()
-            //});
-
-            //ViewBag.CategoryDropDown = CategoryDropDown;
-
-            //Product product = new Product();
 
             ProductVM productVM = new ProductVM()
             {
@@ -55,8 +42,16 @@ namespace TestWebApplication.Controllers
                 {
                     Text = i.Name,
                     Value = i.Id.ToString()
-                })
+                }),
+
+                 ApplicationTypeSelectList = _db.Type.Select(i => new SelectListItem
+                 {
+                     Text = i.Name,
+                     Value = i.Id.ToString()
+                 })
             };
+
+
 
             if(id == null)
             {
@@ -143,6 +138,13 @@ namespace TestWebApplication.Controllers
                 Value = i.Id.ToString()
             });
 
+
+            obj.ApplicationTypeSelectList = _db.Type.Select(i => new SelectListItem
+            {
+                Text = i.Name,
+                Value = i.Id.ToString()
+            });
+
             return View(obj);
         }
 
@@ -153,7 +155,7 @@ namespace TestWebApplication.Controllers
             if (id == null || id == 0)
                 return NotFound();
 
-            Product product = _db.Product.Include(u => u.Category).FirstOrDefault(u => u.Id == id);
+            Product product = _db.Product.Include(u => u.Category).Include(u => u.Type).FirstOrDefault(u => u.Id == id);
 
             if (product == null)
                 return NotFound();

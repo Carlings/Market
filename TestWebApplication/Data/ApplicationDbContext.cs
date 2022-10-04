@@ -23,7 +23,7 @@ namespace TestWebApplication.Data
             logStream.Dispose();
         }
         public override async ValueTask DisposeAsync()
-        {
+         {
             await base.DisposeAsync();
             await logStream.DisposeAsync();
         }

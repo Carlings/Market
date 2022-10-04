@@ -16,6 +16,11 @@ namespace TestWebApplication.Controllers
             _db = db;
         }
 
+        public IActionResult MainPage()
+        {
+            return View();
+        }
+
         public IActionResult Index()
         {
             HomeVM homeVM = new HomeVM()

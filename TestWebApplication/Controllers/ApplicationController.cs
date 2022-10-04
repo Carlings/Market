@@ -22,6 +22,12 @@ namespace TestWebApplication.Controllers
 
             return View(obj);
         }
+        // create - get
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
         // create - post
         [HttpPost]
         public IActionResult Create(ApplicationType type)
